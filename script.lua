@@ -51,8 +51,8 @@ do
     })
 
     Tabs.Premium:AddParagraph({
-        Title = "Prenium",
-        Content = "Voici les Meilleurs Script Special."
+        Title = "Universal Script",
+        Content = "Voici les Scripts qui fonctionne sur TOUT les Jeux."
     })
 
     Tabs.Premium:AddButton({
@@ -127,11 +127,6 @@ do
         end
     })
 
-    
-    Tabs.Premium:AddParagraph({
-        Title = "Universal Script",
-        Content = "Voici les Scripts qui fonctionne sur TOUT les Jeux."
-    })
     Tabs.Premium:AddButton({
         Title = "Unnamed ESP",
         Description = "Permet de Executer le Script Unnamed ESP",
@@ -156,6 +151,30 @@ do
         end
     })
 
+
+    Tabs.Premium:AddButton({
+        Title = "Dark Dex",
+        Description = "Permet de Executer le Script Dark Dex",
+        Callback = function()
+            Window:Dialog({
+                Title = "GuardHub | Information",
+                Content = "Voulez-Vous Executer ce Scripts ?",
+                Buttons = {
+                    {
+                        Title = "Oui",
+                        Callback = function()
+                            loadstring(game:HttpGet('https://ithinkimandrew.site/scripts/tools/dark-dex.lua'))()
+                        end
+                    },
+                    {
+                        Title = "Non",
+                        Callback = function()
+                        end
+                    }
+                }
+            })
+        end
+    })
 
     Tabs.Scripts:AddButton({
         Title = "Survive the Killer",
@@ -208,7 +227,18 @@ do
     })
     
 
+    -- Initialisation des gestionnaires
+    SaveManager:SetLibrary(Fluent)
+    InterfaceManager:SetLibrary(Fluent)
 
+    SaveManager:IgnoreThemeSettings()
+    SaveManager:SetIgnoreIndexes({})
+
+    InterfaceManager:SetFolder("FluentScriptHub")
+    SaveManager:SetFolder("FluentScriptHub/specific-game")
+
+    InterfaceManager:BuildInterfaceSection(Tabs.Settings)
+    SaveManager:BuildConfigSection(Tabs.Settings)
 end
 
 -- Sélectionne l'onglet Main par défaut
