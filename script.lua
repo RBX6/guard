@@ -42,6 +42,11 @@ do
         Content = "VOici une liste de Scripts Vérifié par GuardHub"
     })
 
+        Prenuim.Main:AddParagraph({
+        Title = "Prenuim Seulement !",
+        Content = "Pour débloquer le salon Prenuim veuillez contacter RBX6 sur Discord !"
+    })
+
 
 
     Tabs.Main:AddButton({
