@@ -26,8 +26,8 @@ do
     Fluent:Notify({
         Title = "Guard Hub",
         Content = "Guard Hub ",
-        SubContent = "SubContent", -- Optional
-        Duration = 5 -- Set to nil to make the notification not disappear
+        SubContent = "Créer par RBX6", -- Optional
+        Duration = 3 -- Set to nil to make the notification not disappear
     })
 
 
@@ -38,30 +38,6 @@ do
     })
 
 
-    Tabs.Main:AddButton({
-        Title = "Button",
-        Description = "Very important button",
-        Callback = function()
-            Window:Dialog({
-                Title = "Title",
-                Content = "This is a dialog",
-                Buttons = {
-                    {
-                        Title = "Confirm",
-                        Callback = function()
-                            print("Confirmed the dialog.")
-                        end
-                    },
-                    {
-                        Title = "Cancel",
-                        Callback = function()
-                            print("Cancelled the dialog.")
-                        end
-                    }
-                }
-            })
-        end
-    })
 
 
     local Keybind = Tabs.Main:AddKeybind("Keybind", {
@@ -105,23 +81,6 @@ do
     end)
 
     Keybind:SetValue("MB2", "Toggle") -- Sets keybind to MB2, mode to Hold
-
-
-    local Input = Tabs.Main:AddInput("Input", {
-        Title = "Input",
-        Default = "Default",
-        Placeholder = "Placeholder",
-        Numeric = false, -- Only allows numbers
-        Finished = false, -- Only calls callback when you press enter
-        Callback = function(Value)
-            print("Input changed:", Value)
-        end
-    })
-
-    Input:OnChanged(function()
-        print("Input updated:", Input.Value)
-    end)
-end
 
 
 -- Addons:
