@@ -66,13 +66,12 @@ do
                     {
                         Title = "Oui",
                         Callback = function()
-                            loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Infinite%20Yield.txt"))()
+                            loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
                         end
                     },
                     {
                         Title = "Non",
                         Callback = function()
-                            print("Cancelled the dialog.")
                         end
                     }
                 }
@@ -80,6 +79,82 @@ do
         end
     })
 
+    Tabs.Premium:AddButton({
+        Title = "CMD-X",
+        Description = "Permet de Executer le Script CMD-X",
+        Callback = function()
+            Window:Dialog({
+                Title = "GuardHub | Information",
+                Content = "Voulez-Vous Executer ce Scripts ?",
+                Buttons = {
+                    {
+                        Title = "Oui",
+                        Callback = function()
+                            loadstring(game:HttpGet("https://raw.githubusercontent.com/CMD-X/CMD-X/master/Source"))()
+                        end
+                    },
+                    {
+                        Title = "Non",
+                        Callback = function()
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+    Tabs.Premium:AddButton({
+        Title = "Nameless Admin",
+        Description = "Permet de Executer le Script Nameless Admin",
+        Callback = function()
+            Window:Dialog({
+                Title = "GuardHub | Information",
+                Content = "Voulez-Vous Executer ce Scripts ?",
+                Buttons = {
+                    {
+                        Title = "Oui",
+                        Callback = function()
+                            loadstring(game:HttpGet('https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source'))()
+                        end
+                    },
+                    {
+                        Title = "Non",
+                        Callback = function()
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+    
+    Tabs.Premium:AddParagraph({
+        Title = "Universal Script",
+        Content = "Voici les Scripts qui fonctionne sur TOUT les Jeux."
+    })
+    Tabs.Premium:AddButton({
+        Title = "Unnamed ESP",
+        Description = "Permet de Executer le Script Unnamed ESP",
+        Callback = function()
+            Window:Dialog({
+                Title = "GuardHub | Information",
+                Content = "Voulez-Vous Executer ce Scripts ?",
+                Buttons = {
+                    {
+                        Title = "Oui",
+                        Callback = function()
+                           loadstring(game:HttpGet('https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/UnnamedESP.lua',true))()
+                        end
+                    },
+                    {
+                        Title = "Non",
+                        Callback = function()
+                        end
+                    }
+                }
+            })
+        end
+    })
 
 
     Tabs.Scripts:AddButton({
