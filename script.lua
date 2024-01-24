@@ -1,72 +1,56 @@
--- Charge la bibliothèque Fluent depuis le lien fourni
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-
--- Charge le gestionnaire de sauvegarde depuis le lien fourni
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-
--- Charge le gestionnaire d'interface depuis le lien fourni
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
-
--- Crée une fenêtre avec Fluent
+--Icons https://lucide.dev/icons/ 
+SaveManager:LoadAutoloadConfig()
+Window:SelectTab(1)
+local Tabs = {
+    Dashboard = Window:AddTab({ Title = "Dashboard", Icon = "layout-grid" }),
+    GameScripts = Window:AddTab({ Title = "Games Scripts", Icon = "file-code" }),
+    UniScripts = Window:AddTab({ Title = "Universal Script", Icon = "file-code2" }),
+    Credits = Window:AddTab({ Title = "Credits", Icon = "Credits" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+}
+local Options = Fluent.Options
 local Window = Fluent:CreateWindow({
     Title = "Guard Hub " .. Fluent.Version,
     SubTitle = "by RBX6",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
-    Acrylic = true, -- Le flou peut être détecté, le désactiver entièrement avec false
+    Acrylic = true,
     Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl
+    MinimizeKey = Enum.KeyCode.Z
 })
-
--- Ajoute des onglets à la fenêtre
-local Tabs = {
-    Main = Window:AddTab({ Title = "Dashboard", Icon = "layout-dashboard" }),
-    Scripts = Window:AddTab({ Title = "Scripts", Icon = "scroll" }),
-    Premium = Window:AddTab({ Title = "Premium", Icon = "star" }), -- Correction de l'orthographe
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
-}
-
--- Options Fluent
-local Options = Fluent.Options
-
--- Section d'initialisation
 do
-    -- Notification de bienvenue
     Fluent:Notify({
         Title = "Guard Hub",
-        Content = "Guard Hub ",
-        SubContent = "Créé par RBX6", -- Correction orthographique
-        Duration = 3
+        Content = "Bienvenue à Guard Hub!",
+        SubContent = "Créer par RBX6",
+        Duration = 2
     })
 
-    -- Ajoute un paragraphe dans l'onglet Main
-    Tabs.Main:AddParagraph({
-        Title = "Bienvenue !",
-        Content = "Bienvenue à GuardHub !"
+    Tabs.Dashboard:AddParagraph({
+        Title = "Bienvenue",
+        Content = "Bienvenue Sur Guard Hub Lien Officiel : discord.gg/hrshopp"
     })
 
-    Tabs.Scripts:AddParagraph({
-        Title = "Scripts",
-        Content = "C'est ici que vous pouvez voir les Scripts cértifié par GUARD HUB Inc."
+    Tabs.Credits:AddParagraph({
+        Title = "CREDITS",
+        Content = "FONDATEUR : RBX6 | BETA TESTEUR : NETABEATS, MISTERNUT"
     })
 
-    Tabs.Premium:AddParagraph({
-        Title = "Universal Script",
-        Content = "Voici les Scripts qui fonctionne sur TOUT les Jeux."
-    })
-
-    Tabs.Premium:AddButton({
-        Title = "Infinity Yield",
-        Description = "Permet de Executer le Script Infinity yield",
+    Tabs.Dashboard:AddButton({
+        Title = "Rejoindre le Discord",
+        Description = "Permet de Rejoindre notre Serveur Discord",
         Callback = function()
             Window:Dialog({
                 Title = "GuardHub | Information",
-                Content = "Voulez-Vous Executer ce Scripts ?",
+                Content = "Voulez-Vous Rejoindre Notre Discord ?",
                 Buttons = {
                     {
                         Title = "Oui",
                         Callback = function()
-                            loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+                            setclipboard("discord.gg/hrshopp")
                         end
                     },
                     {
@@ -79,110 +63,13 @@ do
         end
     })
 
-    Tabs.Premium:AddButton({
-        Title = "CMD-X",
-        Description = "Permet de Executer le Script CMD-X",
+    Tabs.Dashboard:AddButton({
+        Title = "Survive The Killer",
+        Description = "Permet de Executer le Script Survive the Killer",
         Callback = function()
             Window:Dialog({
                 Title = "GuardHub | Information",
-                Content = "Voulez-Vous Executer ce Scripts ?",
-                Buttons = {
-                    {
-                        Title = "Oui",
-                        Callback = function()
-                            loadstring(game:HttpGet("https://raw.githubusercontent.com/CMD-X/CMD-X/master/Source"))()
-                        end
-                    },
-                    {
-                        Title = "Non",
-                        Callback = function()
-                        end
-                    }
-                }
-            })
-        end
-    })
-
-    Tabs.Premium:AddButton({
-        Title = "Nameless Admin",
-        Description = "Permet de Executer le Script Nameless Admin",
-        Callback = function()
-            Window:Dialog({
-                Title = "GuardHub | Information",
-                Content = "Voulez-Vous Executer ce Scripts ?",
-                Buttons = {
-                    {
-                        Title = "Oui",
-                        Callback = function()
-                            loadstring(game:HttpGet('https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source'))()
-                        end
-                    },
-                    {
-                        Title = "Non",
-                        Callback = function()
-                        end
-                    }
-                }
-            })
-        end
-    })
-
-    Tabs.Premium:AddButton({
-        Title = "Unnamed ESP",
-        Description = "Permet de Executer le Script Unnamed ESP",
-        Callback = function()
-            Window:Dialog({
-                Title = "GuardHub | Information",
-                Content = "Voulez-Vous Executer ce Scripts ?",
-                Buttons = {
-                    {
-                        Title = "Oui",
-                        Callback = function()
-                           loadstring(game:HttpGet('https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/UnnamedESP.lua',true))()
-                        end
-                    },
-                    {
-                        Title = "Non",
-                        Callback = function()
-                        end
-                    }
-                }
-            })
-        end
-    })
-
-
-    Tabs.Premium:AddButton({
-        Title = "Dark Dex",
-        Description = "Permet de Executer le Script Dark Dex",
-        Callback = function()
-            Window:Dialog({
-                Title = "GuardHub | Information",
-                Content = "Voulez-Vous Executer ce Scripts ?",
-                Buttons = {
-                    {
-                        Title = "Oui",
-                        Callback = function()
-                           loadstring(game:HttpGet('https://ithinkimandrew.site/scripts/tools/dark-dex.lua'))()
-                        end
-                    },
-                    {
-                        Title = "Non",
-                        Callback = function()
-                        end
-                    }
-                }
-            })
-        end
-    })
-
-    Tabs.Scripts:AddButton({
-        Title = "Survive the Killer",
-        Description = "Permet de Executer le Script Survive the killer",
-        Callback = function()
-            Window:Dialog({
-                Title = "GuardHub | Information",
-                Content = "Voulez-Vous Executer ce Scripts ?",
+                Content = "Voulez-vous éxecuter le Script?",
                 Buttons = {
                     {
                         Title = "Oui",
@@ -193,63 +80,9 @@ do
                     {
                         Title = "Non",
                         Callback = function()
-                            print("Cancelled the dialog.")
                         end
                     }
                 }
             })
         end
     })
-
-    Tabs.Scripts:AddButton({
-        Title = "Blox Fruits",
-        Description = "Permet de Executer le Script Blox Fruit",
-        Callback = function()
-            Window:Dialog({
-                Title = "GuardHub | Information",
-                Content = "Voulez-Vous Executer ce Scripts ?",
-                Buttons = {
-                    {
-                        Title = "Oui",
-                        Callback = function()
-                            loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()
-                        end
-                    },
-                    {
-                        Title = "Non",
-                        Callback = function()
-                            print("Cancelled the dialog.")
-                        end
-                    }
-                }
-            })
-        end
-    })
-    
-
-    -- Initialisation des gestionnaires
-    SaveManager:SetLibrary(Fluent)
-    InterfaceManager:SetLibrary(Fluent)
-
-    SaveManager:IgnoreThemeSettings()
-    SaveManager:SetIgnoreIndexes({})
-
-    InterfaceManager:SetFolder("FluentScriptHub")
-    SaveManager:SetFolder("FluentScriptHub/specific-game")
-
-    InterfaceManager:BuildInterfaceSection(Tabs.Settings)
-    SaveManager:BuildConfigSection(Tabs.Settings)
-end
-
--- Sélectionne l'onglet Main par défaut
-Window:SelectTab(1)
-
--- Notification de chargement du script
-Fluent:Notify({
-    Title = "Guard Hub",
-    Content = "Le Menu a été chargé Avec Succés.",
-    Duration = 3
-})
-
--- Charge une configuration automatique si disponible
-SaveManager:LoadAutoloadConfig()
