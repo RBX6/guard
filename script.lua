@@ -153,7 +153,7 @@ do
 
     Tabs.Premium:AddButton({
         Title = "Aimbot",
-        Description = "Permet de Executer le Script Aimbot,
+        Description = "Permet de Executer le Script Aimbot"
         Callback = function()
             Window:Dialog({
                 Title = "GuardHub | Information",
