@@ -50,13 +50,45 @@ do
         Content = "C'est ici que vous pouvez voir les Scripts cértifié par GUARD HUB Inc."
     })
 
+    Tabs.Premium:AddParagraph({
+        Title = "Prenium",
+        Content = "Voici les Meilleurs Script Special."
+    })
+
+    Tabs.Premium:AddButton({
+        Title = "Infinity Yield",
+        Description = "Permet de Executer le Script Infinity yield",
+        Callback = function()
+            Window:Dialog({
+                Title = "GuardHub | Information",
+                Content = "Voulez-Vous Executer ce Scripts ?",
+                Buttons = {
+                    {
+                        Title = "Oui",
+                        Callback = function()
+                            loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Infinite%20Yield.txt"))()
+                        end
+                    },
+                    {
+                        Title = "Non",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+
+
     Tabs.Scripts:AddButton({
         Title = "Survive the Killer",
         Description = "Permet de Executer le Script Survive the killer",
         Callback = function()
             Window:Dialog({
-                Title = "GuardHub | Survive the killer",
-                Content = "Voullez vous Executer ce Scripts ?",
+                Title = "GuardHub | Information",
+                Content = "Voulez-Vous Executer ce Scripts ?",
                 Buttons = {
                     {
                         Title = "Oui",
@@ -80,8 +112,8 @@ do
         Description = "Permet de Executer le Script Blox Fruit",
         Callback = function()
             Window:Dialog({
-                Title = "GuardHub | Blox Fruits",
-                Content = "Voullez vous Executer ce Scripts ?",
+                Title = "GuardHub | Information",
+                Content = "Voulez-Vous Executer ce Scripts ?",
                 Buttons = {
                     {
                         Title = "Oui",
