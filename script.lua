@@ -1,121 +1,109 @@
+-- Charge la bibliothèque Fluent depuis le lien fourni
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+
+-- Charge le gestionnaire de sauvegarde depuis le lien fourni
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+
+-- Charge le gestionnaire d'interface depuis le lien fourni
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
+-- Crée une fenêtre avec Fluent
 local Window = Fluent:CreateWindow({
     Title = "Guard Hub " .. Fluent.Version,
     SubTitle = "by RBX6",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
-    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Acrylic = true, -- Le flou peut être détecté, le désactiver entièrement avec false
     Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+    MinimizeKey = Enum.KeyCode.LeftControl
 })
 
---Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
+-- Ajoute des onglets à la fenêtre
 local Tabs = {
     Main = Window:AddTab({ Title = "Dashboard", Icon = "layout-dashboard" }),
     Scripts = Window:AddTab({ Title = "Scripts", Icon = "scroll" }),
-    Prenuim = Window:AddTab({ Title = "Prenium", Icon = "star" }),
+    Premium = Window:AddTab({ Title = "Premium", Icon = "star" }), -- Correction de l'orthographe
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
+-- Options Fluent
 local Options = Fluent.Options
 
+-- Section d'initialisation
 do
+    -- Notification de bienvenue
     Fluent:Notify({
         Title = "Guard Hub",
         Content = "Guard Hub ",
-        SubContent = "Créer par RBX6", -- Optional
-        Duration = 3 -- Set to nil to make the notification not disappear
+        SubContent = "Créé par RBX6", -- Correction orthographique
+        Duration = 3
     })
 
-
-
+    -- Ajoute un paragraphe dans l'onglet Main
     Tabs.Main:AddParagraph({
         Title = "Bienvenue !",
         Content = "Bienvenue à GuardHub !"
     })
 
-
-
-
+    -- Ajoute un raccourci clavier (Keybind) dans l'onglet Main
     local Keybind = Tabs.Main:AddKeybind("Keybind", {
         Title = "KeyBind",
-        Mode = "Toggle", -- Always, Toggle, Hold
-        Default = "LeftControl", -- String as the name of the keybind (MB1, MB2 for mouse buttons)
-
-        -- Occurs when the keybind is clicked, Value is `true`/`false`
+        Mode = "Toggle",
+        Default = "LeftControl",
         Callback = function(Value)
-            print("Keybind clicked!", Value)
+            print("Raccourci clavier cliqué !", Value)
         end,
-
-        -- Occurs when the keybind itself is changed, `New` is a KeyCode Enum OR a UserInputType Enum
         ChangedCallback = function(New)
-            print("Keybind changed!", New)
+            print("Raccourci clavier changé !", New)
         end
     })
 
-    -- OnClick is only fired when you press the keybind and the mode is Toggle
-    -- Otherwise, you will have to use Keybind:GetState()
+    -- Gestion des événements du raccourci clavier
     Keybind:OnClick(function()
-        print("Keybind clicked:", Keybind:GetState())
+        print("Raccourci clavier cliqué :", Keybind:GetState())
     end)
 
     Keybind:OnChanged(function()
-        print("Keybind changed:", Keybind.Value)
+        print("Raccourci clavier changé :", Keybind.Value)
     end)
 
+    -- Boucle vérifiant si le raccourci clavier est maintenu enfoncé
     task.spawn(function()
         while true do
             wait(1)
-
-            -- example for checking if a keybind is being pressed
             local state = Keybind:GetState()
             if state then
-                print("Keybind is being held down")
+                print("Raccourci clavier maintenu enfoncé")
             end
-
             if Fluent.Unloaded then break end
         end
     end)
 
-    Keybind:SetValue("MB2", "Toggle") -- Sets keybind to MB2, mode to Hold
+    Keybind:SetValue("MB2", "Toggle") -- Définit le raccourci clavier sur MB2, mode sur Hold
 
+    -- Initialisation des gestionnaires
+    SaveManager:SetLibrary(Fluent)
+    InterfaceManager:SetLibrary(Fluent)
 
--- Addons:
--- SaveManager (Allows you to have a configuration system)
--- InterfaceManager (Allows you to have a interface managment system)
+    SaveManager:IgnoreThemeSettings()
+    SaveManager:SetIgnoreIndexes({})
 
--- Hand the library over to our managers
-SaveManager:SetLibrary(Fluent)
-InterfaceManager:SetLibrary(Fluent)
+    InterfaceManager:SetFolder("FluentScriptHub")
+    SaveManager:SetFolder("FluentScriptHub/specific-game")
 
--- Ignore keys that are used by ThemeManager.
--- (we dont want configs to save themes, do we?)
-SaveManager:IgnoreThemeSettings()
+    InterfaceManager:BuildInterfaceSection(Tabs.Settings)
+    SaveManager:BuildConfigSection(Tabs.Settings)
+end
 
--- You can add indexes of elements the save manager should ignore
-SaveManager:SetIgnoreIndexes({})
-
--- use case for doing it this way:
--- a script hub could have themes in a global folder
--- and game configs in a separate folder per game
-InterfaceManager:SetFolder("FluentScriptHub")
-SaveManager:SetFolder("FluentScriptHub/specific-game")
-
-InterfaceManager:BuildInterfaceSection(Tabs.Settings)
-SaveManager:BuildConfigSection(Tabs.Settings)
-
-
+-- Sélectionne l'onglet Main par défaut
 Window:SelectTab(1)
 
+-- Notification de chargement du script
 Fluent:Notify({
     Title = "Guard Hub",
-    Content = "The script has been loaded.",
+    Content = "Le script a été chargé.",
     Duration = 3
 })
 
--- You can use the SaveManager:LoadAutoloadConfig() to load a config
--- which has been marked to be one that auto loads!
+-- Charge une configuration automatique si disponible
 SaveManager:LoadAutoloadConfig()
