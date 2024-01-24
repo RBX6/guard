@@ -45,41 +45,61 @@ do
         Content = "Bienvenue à GuardHub !"
     })
 
-    -- Ajoute un raccourci clavier (Keybind) dans l'onglet Main
-    local Keybind = Tabs.Main:AddKeybind("Keybind", {
-        Title = "KeyBind",
-        Mode = "Toggle",
-        Default = "LeftControl",
-        Callback = function(Value)
-            print("Raccourci clavier cliqué !", Value)
-        end,
-        ChangedCallback = function(New)
-            print("Raccourci clavier changé !", New)
+    Tabs.Scripts:AddParagraph({
+        Title = "Scripts",
+        Content = "C'est ici que vous pouvez voir les Scripts cértifié par GUARD HUB Inc."
+    })
+
+    Tabs.Scripts:AddButton({
+        Title = "Survive the Killer",
+        Description = "Permet de Executer le Script Survive the killer",
+        Callback = function()
+            Window:Dialog({
+                Title = "GuardHub | Survive the killer",
+                Content = "Voullez vous Executer ce Scripts ?",
+                Buttons = {
+                    {
+                        Title = "Oui",
+                        Callback = function()
+                            loadstring(game:HttpGet("https://raw.githubusercontent.com/Milan08Studio/ChairWare/main/main.lua"))()
+                        end
+                    },
+                    {
+                        Title = "Non",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
         end
     })
 
-    -- Gestion des événements du raccourci clavier
-    Keybind:OnClick(function()
-        print("Raccourci clavier cliqué :", Keybind:GetState())
-    end)
-
-    Keybind:OnChanged(function()
-        print("Raccourci clavier changé :", Keybind.Value)
-    end)
-
-    -- Boucle vérifiant si le raccourci clavier est maintenu enfoncé
-    task.spawn(function()
-        while true do
-            wait(1)
-            local state = Keybind:GetState()
-            if state then
-                print("Raccourci clavier maintenu enfoncé")
-            end
-            if Fluent.Unloaded then break end
+    Tabs.Scripts:AddButton({
+        Title = "Blox Fruits",
+        Description = "Permet de Executer le Script Blox Fruit",
+        Callback = function()
+            Window:Dialog({
+                Title = "GuardHub | Blox Fruits",
+                Content = "Voullez vous Executer ce Scripts ?",
+                Buttons = {
+                    {
+                        Title = "Oui",
+                        Callback = function()
+                            loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()
+                        end
+                    },
+                    {
+                        Title = "Non",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
         end
-    end)
-
-    Keybind:SetValue("MB2", "Toggle") -- Définit le raccourci clavier sur MB2, mode sur Hold
+    })
+    
 
     -- Initialisation des gestionnaires
     SaveManager:SetLibrary(Fluent)
@@ -101,7 +121,7 @@ Window:SelectTab(1)
 -- Notification de chargement du script
 Fluent:Notify({
     Title = "Guard Hub",
-    Content = "Le script a été chargé.",
+    Content = "Le Menu a été chargé Avec Succés.",
     Duration = 3
 })
 
