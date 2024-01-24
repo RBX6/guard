@@ -35,7 +35,7 @@ do
         Title = "Bienvenue !",
         Content = "Veuillez choisir un Scripts dans le tab Scripts."
     })
-
+ 
 
 
 
@@ -67,7 +67,7 @@ SaveManager:BuildConfigSection(Tabs.Settings)
 Window:SelectTab(1)
 
 Fluent:Notify({
-    Title = "STATUS GUARD HUB",
+    Title = "Guard Hub",
     Content = "unpatched",
     Duration = 2
 })
